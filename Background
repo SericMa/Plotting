@@ -1,0 +1,50 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+ruth = pd.read_csv('ruth.csv')
+# daniel = pd.read_csv('daniel.csv')
+
+
+def pickUpBG(df):
+    df = pd.DataFrame(df.iloc[:, 1:69]).drop(columns=['time', 'thermistor'])
+    df = df[(df['x'] > 1.47) | (df['x'] < -1.47) | (df['y'] > 1.05) | (df['y'] < -4.02)]
+    df = df.drop(columns=['x', 'y'])
+    # print(df)
+    return df
+
+
+pickup_ruth = pickUpBG(ruth)
+std = pickup_ruth.std()
+median = pickup_ruth.median()
+
+# pickup_daniel = pickUpBG(daniel)
+# std1 = pickup_daniel.std()
+# median1 = pickup_daniel.median()
+
+
+def drawCharts(stem1, stem2, hist1, hist2):
+
+    figure1 = plt.figure()
+    plt.stem(stem1, use_line_collection=True)
+    plt.title('Stem Chart for std')
+
+    figure2 = plt.figure()
+    plt.stem(stem2, use_line_collection=True)
+    plt.title('Stem Chart for Median')
+
+    figure3 = plt.figure()
+    hist1.plot.hist()
+    plt.title('Histogram Chart for Std')
+
+    figure4 = plt.figure()
+    hist2.plot.hist()
+    plt.title('Histogram Chart for Median')
+
+    return stem1, stem2, hist1, hist2
+
+
+stem_std, stem_media, hist_std, hist_media = drawCharts(std, median, std, median)
+# stem1_std, stem1_media, hist1_std, hist1_media = drawCharts(std1, median1, std1, median1)
+
+plt.show()
+
