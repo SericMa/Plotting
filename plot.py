@@ -119,3 +119,6 @@ title = plt.title("coordinates: " + "(" + str(location_X) + ", " + str(location_
 plt.setp(title, color='r')
 
 plt.show()
+
+
+# end
