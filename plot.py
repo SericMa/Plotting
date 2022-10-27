@@ -4,6 +4,8 @@
 @Year: 2022
 @python version: python 3.8
 """
+
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
@@ -30,12 +32,12 @@ coordinates = pd.DataFrame(d)
 * "o" means "out of coverage"
 """
 
-# splitting
-i = coordinates[(coordinates.x <= -1.45) | (coordinates.x >= 1.45) | (coordinates.y >= 3.98) | (coordinates.y <= 1.1)]
-o = coordinates[(coordinates.x > -1.45) & (coordinates.x < 1.45) & (coordinates.y < 3.98) & (coordinates.y > 1.1)]
-
-# plot the chart
-"""
+# # splitting
+# i = coordinates[(coordinates.x <= -1.44) | (coordinates.x >= 1.44) | (coordinates.y >= 3.94) | (coordinates.y <= 1.1)]
+# o = coordinates[(coordinates.x > -1.44) & (coordinates.x < 1.44) & (coordinates.y < 3.94) & (coordinates.y > 1.1)]
+#
+# # plot the chart
+#
 # fig1, ax1 = plt.subplots()
 # ax1.scatter(i.x, i.y, color="black")
 # ax1.scatter(o.x, o.y, color="green")
@@ -48,16 +50,16 @@ o = coordinates[(coordinates.x > -1.45) & (coordinates.x < 1.45) & (coordinates.
 #         color="orange",  # line color
 #     )
 # )
-"""
+
 
 # pick up the specific location by entering
 inputRow = tk.Tk()
 inputRow.withdraw()
 row_INP = simpledialog.askstring(title="plot", prompt="please enter the row")
-# inputRow = input('input row wanted: ')
 inputRow_int = int(row_INP)
 location_X = data.iloc[inputRow_int, 64]
 location_Y = data.iloc[inputRow_int, 65]
+
 fig2, axi2 = plt.subplots()
 axi2.scatter(location_X, location_Y, color="red")
 axi2.add_patch(
@@ -72,6 +74,48 @@ axi2.add_patch(
 
 title = plt.title("coordinates: " + "(" + str(location_X) + ", " + str(location_Y) + ")")
 plt.setp(title, color='r')
+
+# ************************************************************************************************
+"""
+Here is a part that will be used to plot the heat map
+
+note:
+    *   1468 - center coordinates       *
+    *   5232 - topLeft coordinates      *
+    *   5487 - topRight coordinates     *
+    *   6595 - lowerLeft coordinates    *
+    *   1099 - lowerRight coordinates   *
+"""
+
+# drop out the coordinates
+thermal_data = data.drop(data.columns[[64, 65]], axis=1)
+
+# simple background subtraction
+background = data[(data['x'] < -1.47) | (data['x'] > 1.47) | (data['y'] < 1.05) |
+                  (data['y'] > 4.02)]
+
+background = background.drop(background.columns[[64, 65]], axis=1)
+
+BK_SB = thermal_data - background.mean()
+
+point = BK_SB.iloc[inputRow_int, :]
+
+
+# reshape the DataFrame
+def reshape(df):
+    df = df.values
+    Re_df = df.reshape(8, 8)
+    Re_df = Re_df.astype(float)
+    Re_df = np.rot90(Re_df, k=2)
+    return Re_df
+
+
+heatmap = reshape(point)
+
+# plotting the heatmap
+fig3, axi3 = plt.subplots()
+sns.heatmap(heatmap, annot=True, linewidths=0.5, cmap='hot_r', fmt='2g')
+title = plt.title("coordinates: " + "(" + str(location_X) + ", " + str(location_Y) + ")")
+plt.setp(title, color='r')
+
 plt.show()
-
-
