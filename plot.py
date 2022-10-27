@@ -102,6 +102,7 @@ BK_SB = thermal_data - background.mean()
 # second filter by median()
 BK_SB = thermal_data - background.median()
 
+# get the location point
 point = BK_SB.iloc[inputRow_int, :]
 
 
