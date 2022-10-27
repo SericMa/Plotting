@@ -96,7 +96,11 @@ background = data[(data['x'] < -1.47) | (data['x'] > 1.47) | (data['y'] < 1.05) 
 
 background = background.drop(background.columns[[64, 65]], axis=1)
 
+# first filter by mean()
 BK_SB = thermal_data - background.mean()
+
+# second filter by median()
+BK_SB = thermal_data - background.median()
 
 point = BK_SB.iloc[inputRow_int, :]
 
