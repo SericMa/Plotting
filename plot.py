@@ -80,11 +80,11 @@ plt.setp(title, color='r')
 Here is a part that will be used to plot the heat map
 
 note:
-    *   1468 - center coordinates       *
-    *   5232 - topLeft coordinates      *
-    *   5487 - topRight coordinates     *
-    *   6595 - lowerLeft coordinates    *
-    *   1099 - lowerRight coordinates   *
+    *   1468 - center       *
+    *   5232 - topLeft      *
+    *   5487 - topRight     *
+    *   6595 - lowerLeft    *
+    *   1099 - lowerRight   *
 """
 
 # drop out the coordinates
