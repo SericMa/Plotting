@@ -18,7 +18,7 @@ location_X = data.iloc[inputRow_int, 64]
 location_Y = data.iloc[inputRow_int, 65]
 
 fig2, axi2 = plt.subplots()
-axi2.scatter(location_X, location_Y, color="red")
+axi2.scatter(location_X, location_Y, color="green")
 axi2.set_ylim(ymin=-1)
 axi2.set_ylim(ymax=5)
 axi2.set_xlim(xmin=-4)
@@ -34,9 +34,9 @@ axi2.add_patch(
 )
 
 axi2.add_patch(patches.Rectangle(
-    (-0.20, 1.64),  # Coordinate(x ,y)
-    0.4,  # width
-    0.4,  # height
+    (-0.4, 2.1),  # Coordinate(x ,y)
+    0.8,  # width
+    0.8,  # height
     fill=None,  # fill color
     color="red",  # line color
 ))
