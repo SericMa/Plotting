@@ -34,9 +34,9 @@ axi2.add_patch(
 )
 
 axi2.add_patch(patches.Rectangle(
-    (-0.20, 1.1),  # Coordinate(x ,y)
+    (-0.20, 1.64),  # Coordinate(x ,y)
     0.4,  # width
-    1.8,  # height
+    0.4,  # height
     fill=None,  # fill color
     color="red",  # line color
 ))

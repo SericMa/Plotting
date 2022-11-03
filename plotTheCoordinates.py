@@ -34,8 +34,8 @@ coordinates = pd.DataFrame(d)
 # o = coordinates[(coordinates.x > -1.44) & (coordinates.x < 1.44) & (coordinates.y < 3.94) & (coordinates.y > 1.1)]
 
 
-i = coordinates[(coordinates.x <= -0.20) | (coordinates.x >= 0.20) | (coordinates.y >= 2.9) | (coordinates.y <= 1.1)]
-o = coordinates[(coordinates.x > -0.20) & (coordinates.x < 0.20) & (coordinates.y < 2.9) & (coordinates.y > 1.1)]
+i = coordinates[(coordinates.x <= -0.40) | (coordinates.x >= 0.40) | (coordinates.y >= 2.9) | (coordinates.y <= 2.1)]
+o = coordinates[(coordinates.x > -0.40) & (coordinates.x < 0.40) & (coordinates.y < 2.9) & (coordinates.y > 2.1)]
 
 # plot the chart
 
@@ -55,9 +55,9 @@ ax1.add_patch(
 )
 
 ax1.add_patch(patches.Rectangle(
-    (-0.20, 1.1),  # Coordinate(x ,y)
-    0.4,  # width
-    1.8,  # height
+    (-0.4, 2.1),  # Coordinate(x ,y)
+    0.8,  # width
+    0.8,  # height
     fill=None,  # fill color
     color="red",  # line color
 ))
