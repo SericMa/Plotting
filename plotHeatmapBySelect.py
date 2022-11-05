@@ -72,7 +72,7 @@ def reshape(df):
     df = df.values
     Re_df = df.reshape(8, 8)
     Re_df = Re_df.astype(float)
-    Re_df = Re_df[::-1, ::-1]
+    Re_df = Re_df[::-1, ::-1]*
     df = Re_df
     return df
 
